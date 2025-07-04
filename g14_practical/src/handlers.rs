@@ -93,10 +93,56 @@ curl -X POST http://localhost:8080/login \
   -H "Content-Type: application/json" \
   -d '{"username": "admin", "password": "admin123"}'</pre>
 
-        <h3>Get All Bugs:</h3>
+        <h3>Bugs Testing:</h3>
+        <h4>Create Bugs</h4>
+        <pre style="background: #f1f3f4; padding: 10px; border-radius: 4px; overflow-x: auto;">
+curl -X POST http://localhost:8080/bugs/new -H "Content-Type: application/json" -d "{\"title\":\"Test Bug 1\",\"description\":\"Description 1\",\"reported_by\":\"test1@test.com\",\"severity\":\"High\"}"
+curl -X POST http://localhost:8080/bugs/new -H "Content-Type: application/json" -d "{\"title\":\"Test Bug 2\",\"description\":\"Description 2\",\"reported_by\":\"test2@test.com\",\"severity\":\"Medium\"}"
+</pre>
+        <h4>Get All Bugs</h4>
         <pre style="background: #f1f3f4; padding: 10px; border-radius: 4px; overflow-x: auto;">
 curl http://localhost:8080/bugs</pre>
+
+        <h4>Update Bug</h4>
+        <pre style="background: #f1f3f4; padding: 10px; border-radius: 4px; overflow-x: auto;">
+curl -X PATCH http://localhost:8080/bugs/1 -H "Content-Type: application/json" -d "{\"id\":1,\"title\":\"Updated Bug\",\"description\":\"Updated description\",\"reported_by\":\"test1@test.com\",\"severity\":\"Critical\",\"developer_id\":1}"</pre>
+        
+        <h4>Delete Bugs</h4>
+        <pre style="background: #f1f3f4; padding: 10px; border-radius: 4px; overflow-x: auto;">
+curl -X DELETE http://localhost:8080/bugs/2</pre>
+
+        <h3>Validation Testing</h3>
+        <h4>Empty Project Name (should fail):</h4>
+        <pre style="background: #f1f3f4; padding: 10px; border-radius: 4px; overflow-x: auto;">
+curl -X POST http://localhost:8080/projects -H "Content-Type: application/json" -d "{\"name\":\"\",\"description\":\"Test project\"}" </pre>
+       
+        <h3>Get Project List:</h3>
+        <pre style="background: #f1f3f4; padding: 10px; border-radius: 4px; overflow-x: auto;"> 
+curl http://localhost:8080/projects</pre>
+
+        <h3>Add Project:</h3>
+        <pre style="background: #f1f3f4; padding: 10px; border-radius: 4px; overflow-x: auto;">
+curl -X POST http://localhost:8080/projects -H "Content-Type: application/json" -d "{\"name\":\"DevOps Pipeline\",\"description\":\"CI/CD and deployment automation\"}"</pre>
+
+    <h3>Thread-Safety Testing:</h3>
+        <pre style="background: #f1f3f4; padding: 10px; border-radius: 4px; overflow-x: auto;">
+curl -X POST http://localhost:8080/projects -H "Content-Type: application/json" -d "{\"name\":\"Project Alpha\",\"description\":\"Alpha testing project\"}" &
+curl -X POST http://localhost:8080/projects -H "Content-Type: application/json" -d "{\"name\":\"Project Beta\",\"description\":\"Beta testing project\"}" &
+curl -X POST http://localhost:8080/projects -H "Content-Type: application/json" -d "{\"name\":\"Project Gamma\",\"description\":\"Gamma testing project\"}" & </pre> 
+    
+     <h3>Fix Admin Password:</h3>
+        <pre style="background: #f1f3f4; padding: 10px; border-radius: 4px; overflow-x: auto;">
+curl -X POST http://localhost:8080/fix-admin</pre>
+
+    <h3>Failed Login Attempts:</h3>
+    <h4>Wrong Password</h4>
+        <pre style="background: #f1f3f4; padding: 10px; border-radius: 4px; overflow-x: auto;">
+curl -X POST http://localhost:8080/login -H "Content-Type: application/json" -d "{\"username\":\"admin\",\"password\":\"wrongpassword\"}"</pre>
+    <h4>Wrong Username</h4>
+        <pre style="background: #f1f3f4; padding: 10px; border-radius: 4px; overflow-x: auto;">
+curl -X POST http://localhost:8080/login -H "Content-Type: application/json" -d "{\"username\":\"wronguser\",\"password\":\"admin123\"}"</pre>
     </div>
+    
 
     <div class="section">
         <h2>👤 Default Users</h2>
