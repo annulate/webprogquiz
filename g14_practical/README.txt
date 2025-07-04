@@ -7,7 +7,7 @@ Built with enhanced security using bcrypt password hashing and JWT authenticatio
 
 ## Features Implemented
 
-### Core Requirements ✅
+### Core Requirements 
 1. Bug Report Creation (POST /bugs/new)
    - Accepts JSON with title, description, reported_by, severity
    - Stores in SQLite database with auto-generated ID
@@ -32,7 +32,7 @@ Built with enhanced security using bcrypt password hashing and JWT authenticatio
    - Form submission updates bug record with developer_id
    - Confirmation page with error handling for invalid IDs
 
-5. Full CRUD for Bugs ✅
+5. Full CRUD for Bugs 
    - POST /bugs/new - Create new bug report
    - GET /bugs - List all bugs as JSON
    - GET /bugs/:id - Retrieve specific bug (404 if not found)
@@ -167,6 +167,8 @@ Built with enhanced security using bcrypt password hashing and JWT authenticatio
 
 1. Ensure Rust 1.70+ installed
 2. Create .env file with configuration
+3. Run: export DATABASE_URL="sqlite://$(pwd)/bugs.db"
+        export JWT_SECRET="replace_with_a_long_random_string"
 3. Run: cargo run
 4. Server starts at http://127.0.0.1:8080
 5. Database tables created automatically
