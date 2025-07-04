@@ -94,10 +94,6 @@ curl -X POST http://localhost:8080/login \
   -d '{"username": "admin", "password": "admin123"}'</pre>
 
         <h3>Bugs Testing:</h3>
-        <h4>Create Bugs</h4>
-        <pre style="background: #f1f3f4; padding: 10px; border-radius: 4px; overflow-x: auto;">
-curl -X POST http://localhost:8080/bugs/new -H "Content-Type: application/json" -d "{\"title\":\"Test Bug 1\",\"description\":\"Description 1\",\"reported_by\":\"test1@test.com\",\"severity\":\"High\"}"
-curl -X POST http://localhost:8080/bugs/new -H "Content-Type: application/json" -d "{\"title\":\"Test Bug 2\",\"description\":\"Description 2\",\"reported_by\":\"test2@test.com\",\"severity\":\"Medium\"}"
 </pre>
         <h4>Get All Bugs</h4>
         <pre style="background: #f1f3f4; padding: 10px; border-radius: 4px; overflow-x: auto;">
