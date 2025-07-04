@@ -39,6 +39,7 @@ impl AppState {
     
     pub async fn get_next_project_id(&self) -> i64 {
         let projects = self.projects.read().await;
-        projects.iter().map(|p| p.id).max().unwrap_or(0) + 1
+        let max_id = projects.iter().map(|p| p.id).max().unwrap_or(0);
+        max_id + 1  // Don't hold the lock while returning
     }
 }

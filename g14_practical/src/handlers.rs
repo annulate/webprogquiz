@@ -297,8 +297,8 @@ pub async fn add_project(
         return Ok(HttpResponse::BadRequest().json("Project name is required"));
     }
     
-    let mut projects = app_state.projects.write().await;
     let new_id = app_state.get_next_project_id().await;
+    let mut projects = app_state.projects.write().await;
     
     let new_project = Project {
         id: new_id,
@@ -308,6 +308,7 @@ pub async fn add_project(
     };
     
     projects.push(new_project.clone());
+    drop(projects);
     println!("📁 Created project #{}: {}", new_id, project.name);
     
     Ok(HttpResponse::Created().json(new_project))
